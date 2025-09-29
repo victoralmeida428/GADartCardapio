@@ -1,0 +1,1 @@
+enum SpecieType { DOG, CAT }

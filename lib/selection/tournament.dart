@@ -47,4 +47,47 @@ class Tournament<T> implements SelectionAbstract<T> {
     // Retorna o vencedor do torneio. O operador '!' garante que o valor não é nulo.
     return winner!;
   }
+
+    /// Seleciona um número [count] de indivíduos da [population] para serem pais.
+  ///
+  /// Para cada um dos [count] indivíduos a serem selecionados, um torneio
+  /// separado é realizado.
+  ///
+  /// Retorna uma lista com os indivíduos vencedores.
+  List<Individual<T>> select(List<Individual<T>> population, int count) {
+    // Validações de entrada
+    if (population.isEmpty) {
+      throw ArgumentError('A população não pode estar vazia.');
+    }
+    if (count <= 0) {
+      throw ArgumentError('O número de indivíduos a selecionar deve ser positivo.');
+    }
+
+    final List<Individual<T>> selected = [];
+
+    // Repete o processo de seleção 'count' vezes para obter a quantidade
+    // desejada de pais.
+    for (int i = 0; i < count; i++) {
+      // --- Lógica do Torneio Individual ---
+
+      // 1. Seleciona os competidores para este torneio.
+      // Esta abordagem (sem reposição para o torneio) é mais próxima do DEAP.
+      final List<Individual<T>> contestants = [];
+      for (int j = 0; j < tournamentSize; j++) {
+        final randomIndex = _random.nextInt(population.length);
+        contestants.add(population[randomIndex]);
+      }
+
+      // 2. Encontra o melhor competidor (vencedor do torneio).
+      // Usar 'reduce' é uma forma funcional e elegante de encontrar o melhor.
+      final winner = contestants.reduce(
+        (currentWinner, competitor) =>
+            competitor.fitness > currentWinner.fitness ? competitor : currentWinner,
+      );
+
+      selected.add(winner);
+    }
+
+    return selected;
+  }
 }

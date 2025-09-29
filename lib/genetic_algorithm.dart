@@ -50,10 +50,11 @@ class GeneticAlgorithm<T> {
 
       final List<Individual<T>> newPopulation = [];
 
-      // ... (O resto da lógica do loop permanece o mesmo)
+      final List<Individual<T>> matingPool = _selection.select(population, _cte.populationSize * 3);
+
       for (int j = 0; j < _cte.populationSize; j++) {
-        final parent1 = _selection.selectParent(population);
-        final parent2 = _selection.selectParent(population);
+        final parent1 = matingPool[j * 3];
+        final parent2 = matingPool[j * 3 + 1];
 
         final child = _crossover.crossover(
           parent1,
@@ -66,7 +67,8 @@ class GeneticAlgorithm<T> {
       }
       population = newPopulation;
     }
-    final double score = (overallBestIndividual?.fitness.toDouble() ?? 0) / 1000.0;
+    final double score =
+        (overallBestIndividual?.fitness.toDouble() ?? 0) / 1000.0;
     print('Melhor Dieta -> (Score: ${score.toStringAsFixed(4)})');
     print(overallBestIndividual?.genes); // Isso chamará o toString() aprimorado
   }

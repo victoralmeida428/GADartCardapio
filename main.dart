@@ -108,7 +108,7 @@ main() {
         final randomFoodItem = availableFoodsForMeal.removeAt(foodIndex);
 
         // 3. Define uma quantidade aleatória
-        final randomQuantity = random.nextDouble() * 7.0 + 1.0;
+        final randomQuantity = random.nextDouble() * 8.95 + 0.05;
 
         // 4. Cria o componente e o adiciona à refeição
         final component = MealComponent(randomFoodItem, randomQuantity);

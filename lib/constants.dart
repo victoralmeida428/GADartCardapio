@@ -26,6 +26,7 @@ class DietConstants implements ProblemCostants {
 
   // Alvo total de calorias para o dia
   double get targetTotalCalories => 1200.0;
+  set targetTotalCalories(double value) => targetTotalCalories = value;
 
   // --- Alvos de Composição ---
   // Para cães

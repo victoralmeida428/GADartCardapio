@@ -1,14 +1,10 @@
 name: dart_genetic_algorithm
 description: Um exemplo de algoritmo genético implementado em Dart.
-version: 1.0.0
+version: 1.0.1
 
 environment:
   sdk: '>=3.0.0 <4.0.0'
 
-# As dependências que o seu projeto precisa para funcionar
-dependencies:
-  # Nenhuma dependência externa é necessária para este algoritmo,
-  # pois ele usa apenas bibliotecas padrão do Dart.
 
 # As dependências que o seu projeto precisa para os testes
 dev_dependencies:

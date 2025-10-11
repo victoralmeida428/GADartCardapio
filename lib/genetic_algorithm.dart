@@ -35,7 +35,7 @@ class GeneticAlgorithm<T> {
     }
   }
 
-  void run() {
+  Individual? run() {
     Individual<T>? overallBestIndividual;
 
     for (int i = 0; i < _cte.generations; i++) {
@@ -70,6 +70,7 @@ class GeneticAlgorithm<T> {
     final double score =
         (overallBestIndividual?.fitness.toDouble() ?? 0) / 1000.0;
     print('Melhor Dieta -> (Score: ${score.toStringAsFixed(4)})');
-    print(overallBestIndividual?.genes); // Isso chamará o toString() aprimorado
+    print(overallBestIndividual?.genes); 
+    return overallBestIndividual;
   }
 }

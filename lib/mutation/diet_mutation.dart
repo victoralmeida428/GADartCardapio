@@ -21,7 +21,7 @@ class DietMutation implements MutationAbstract<DailyDiet> {
       final DailyDiet dietGenes = individual.genes;
 
       final mutationType = random.nextInt(3);
-      final mealIndex = random.nextInt(3);
+      final mealIndex = random.nextInt(dietGenes.meals.length);
       final meal = dietGenes.meals[mealIndex];
 
       switch (mutationType) {

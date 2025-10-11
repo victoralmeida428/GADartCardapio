@@ -15,7 +15,7 @@ import 'package:dart_genetic_algorithm/selection/tournament.dart';
 
 main() {
   final cte = DietConstants();
-
+  cte.targetTotalCalories = 100;
   // --- Escolha o tipo de animal aqui ---
   final animalType = SpecieType.DOG; // ou 'cat'
 
@@ -35,13 +35,13 @@ main() {
       'Alvo: ${targetMeat * 100}% carne, ${targetVeg * 100}% vegetais, ~${cte.targetTotalCalories} kCal');
 
   final fitness = DietFitnessCalculator(cte, targetMeat, targetVeg);
-
+  
   final selectionStrategy = Tournament<DailyDiet>();
   final crossoverStrategy = DietCrossover();
   final mutationStrategy = DietMutation(cte);
 
   DailyDiet generateRandomGene() {
-    final diet = DailyDiet();
+    final diet = DailyDiet.randomMeals();
 
     // Itera sobre cada uma das 3 refeições da dieta
     for (int i = 0; i < diet.meals.length; i++) {

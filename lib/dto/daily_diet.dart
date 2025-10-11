@@ -1,9 +1,18 @@
+import 'dart:math';
+
 import 'package:dart_genetic_algorithm/dto/meal_component.dart';
 import 'package:dart_genetic_algorithm/enum/food.dart';
 
 class DailyDiet {
   // Uma dieta consiste em 3 refeições, cada uma com uma lista de componentes
-  final List<List<MealComponent>> meals = [[], [], []];
+  final List<List<MealComponent>> meals;
+
+  DailyDiet.randomMeals() : meals = List.generate(Random().nextInt(3) + 1, (_) => []) {
+    // O construtor agora cria uma lista com 1, 2 ou 3 refeições vazias.
+    // Ex: Random().nextInt(3) -> sorteia 0, 1, ou 2. Somando 1, temos 1, 2, ou 3.
+  }
+
+  DailyDiet.fromMeals(this.meals);
 
   double get _totalMeatCal {
     double weight = 0.0;
@@ -63,14 +72,13 @@ class DailyDiet {
   }
 
   // --- Método toString() Aprimorado para Depuração ---
-  @override
+ @override
   String toString() {
     final buffer = StringBuffer();
     final calories = totalDailyCalories;
     final meat = meatPercentage * 100;
     final vegs = vegetablePercentage * 100;
 
-    // Adiciona o totalizador de depuração na linha de cabeçalho
     buffer.writeln(
         'Dieta com ${calories.toStringAsFixed(2)} kCal (${meat.toStringAsFixed(2)}% carne, ${vegs.toStringAsFixed(2)}% vegetais)');
 
@@ -84,7 +92,6 @@ class DailyDiet {
         for (final component in meal) {
           final foodName = component.foodItem.name;
           final quantity = component.gram.toStringAsFixed(2);
-          // Adiciona um indicador de tipo [M]eat ou [V]egetable
           final type = component.foodItem.type;
           buffer.writeln(
               '    - $foodName ($quantity g) [$type] => ${component.totalCalories.toStringAsFixed(2)} kCal');

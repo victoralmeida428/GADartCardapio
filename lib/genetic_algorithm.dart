@@ -2,7 +2,8 @@ import 'package:dart_genetic_algorithm/crossover/crossover_abstract.dart';
 import 'package:dart_genetic_algorithm/individual.dart';
 import 'package:dart_genetic_algorithm/mutation/mutation_abstract.dart';
 import 'package:dart_genetic_algorithm/problem_interfaces.dart';
-import 'package:dart_genetic_algorithm/selection/selection_abstract.dart';
+import 'package:dart_genetic_algorithm/selection/selection_abstract.dart'
+    hide random;
 
 class GeneticAlgorithm<T> {
   List<Individual<T>> population = [];
@@ -50,11 +51,19 @@ class GeneticAlgorithm<T> {
 
       final List<Individual<T>> newPopulation = [];
 
-      final List<Individual<T>> matingPool = _selection.select(population, _cte.populationSize * 3);
-
+      final n = random.nextInt(3) + 1;
+      final List<Individual<T>> matingPool =
+          _selection.select(population, _cte.populationSize * n);
       for (int j = 0; j < _cte.populationSize; j++) {
-        final parent1 = matingPool[j * 3];
-        final parent2 = matingPool[j * 3 + 1];
+        // Seleciona dois pais aleatórios do mating pool
+        final parent1 = matingPool[random.nextInt(matingPool.length)];
+
+        // Garante que o segundo pai seja diferente do primeiro
+        Individual<T> parent2;
+        do {
+          parent2 = matingPool[random.nextInt(matingPool.length)];
+        } while (
+            parent1 == parent2); // Evita que um indivíduo cruze consigo mesmo
 
         final child = _crossover.crossover(
           parent1,
@@ -70,7 +79,7 @@ class GeneticAlgorithm<T> {
     final double score =
         (overallBestIndividual?.fitness.toDouble() ?? 0) / 1000.0;
     print('Melhor Dieta -> (Score: ${score.toStringAsFixed(4)})');
-    print(overallBestIndividual?.genes); 
+    print(overallBestIndividual?.genes);
     return overallBestIndividual;
   }
 }

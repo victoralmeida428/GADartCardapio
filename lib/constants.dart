@@ -42,6 +42,8 @@ class DietConstants implements ProblemCostants {
   // --- Carnes Musculares ---
   FoodItem('Carne Bovina (Patinho)', 38.0, FoodType.MUSCLE_MEAT),
   FoodItem('Peito de Frango sem Pele', 31.4, FoodType.MUSCLE_MEAT),
+  FoodItem('Sobrecoxa de Frango c/ Pele', 49.9, FoodType.MUSCLE_MEAT),
+  FoodItem('Sobrecoxa de Frango s/ Pele', 39.7, FoodType.MUSCLE_MEAT),
   FoodItem('Moela de Frango', 26.8, FoodType.MUSCLE_MEAT),
   FoodItem('Sardinha em Água', 59.4, FoodType.MUSCLE_MEAT),
 
@@ -59,5 +61,6 @@ class DietConstants implements ProblemCostants {
   FoodItem('Brócolis', 9.7, FoodType.VEGETABLE),
   FoodItem('Cenoura', 11.7, FoodType.VEGETABLE),
   FoodItem('Abóbora', 7.4, FoodType.VEGETABLE),
+  FoodItem('Beterraba', 13.9, FoodType.VEGETABLE)
 ];
 }
